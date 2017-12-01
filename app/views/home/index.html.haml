@@ -1,0 +1,70 @@
+!!!
+%html{:lang => "ja"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "UTF-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %title 小中学生向けオンラインプログラミング学習サービスTechChance!EX
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    %meta{:content => "小学生、中学生向けのオンラインプログラミング学習サービスです", :name => "description"}/
+    %meta{:content => "小学生,中学生,オンライン,プログラミング,スクール", :name => "keywords"}/
+    %link{:href => "stylesheets/home.scss", :rel => "stylesheets"}/
+    %script{:src => "javascripts/home.js", :type => "text/javascript"}
+    /[if lt IE 9]
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  %body#top
+    #container
+      %header
+        %h1#logo
+          %a{:href => "index.html"}
+            %img{:alt => "", :src => "logo_top.png"}/
+        %p
+          %img#mainimg{:alt => "", :src => "mainimg.jpg"}/
+      %nav#menubar
+        %ul
+          %li.current
+            %a{:href => "index.html"} TechChance!EX
+          %li
+            %a{:href => "about.html"} ログイン
+          %li
+            %a{:href => "gallery.html"} 新規登録
+          %li
+            %a{:href => "link.html"} スクール新規登録
+      #contents
+        %section#new
+          %h2#newinfo_hdr.close 小中学生向けオンラインプログラミング学習サービスTechChance!EX
+          %dl#newinfo
+            %dt TechChance!EXとは
+            %dd 小中高生向けにプログラミングスクールを運営するTechChance!のプログラミング教材をオンラインで学習することができるサービスです。
+          %dl#newinfo
+            %dt 　　豊富な教材
+            %dd TechChance!が作成したプログラミング教材に加え民間でプログラミング教育を行うスクールや個人の教材で学習することが可能です。
+          %dl#newinfo
+            %dt 　　学習サポート
+            %dd 家の近くのプログラミングスクールが表示されるので、いつでも授業のサポートをしてくれる教室を探せます。
+        %h2 　学べるレッスン一覧
+        .list
+          %img{:src => "scratch.jpg"}/
+          %h4 スクラッチ
+          %p Scratch (スクラッチ) とは初心者が、プログラミングの正しい構文の書き方を覚えること無く学習ができるプログラミング言語学習環境です。MITメディアラボが開発し、遊び心のある実験やインタラクティブアニメーション、ゲームなどの製作を通してさらなる学習のやる気を起こさせることを目的とした教材です。
+        .list
+          %img{:src => "minecraft.jpg"}/
+          %h4 マインクラフト
+          %p 今、話題のものづくりゲーム「Minecraft（マインクラフト）」を使ってプログラミングが学習できる教育プログラムです。Minecraftの世界の中でコンピュータへの命令をプログラミングすることで、洞窟を掘る、建物を建てる、等の動作を自動で行わせるような開発を学習することができます。ゲームの中で楽しくプログラミングの基本が学べるよう設計されたコースです。
+      / /contents
+      %footer
+        %small
+          Copyright©
+          %a{:href => "index.html"} TechChance!EX
+          All Rights Reserved.
+        %span.pr
+          《
+          %a{:href => "https://template-party.com/", :target => "_blank"}> Web Design:Template-Party
+          》
+    / /container
+    / スマホ用更新情報　480px以下
+    :javascript
+      if (OCwindowWidth() <= 480) {
+        open_close("newinfo_hdr", "newinfo");
+      }
