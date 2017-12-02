@@ -21,19 +21,42 @@
             %img{:alt => "TechChance!EX", :src => "#{asset_path 'logo_top.png'}"}/
       %nav#menubar
         %ul
-          %li
-            %a{:href => "index.html"} ユーザー編集
-          %li
-            %a{:href => "about.html"} 教材投稿
+          -if current_user.student_address.present?
+            %li
+              = link_to "アカウント編集", edit_user_path(current_user)
+          -if current_user.school_address.present?
+            %li
+              = link_to "アカウント編集", school_edit_user_path(current_user)
+            %li
+              %a{:href => "/"} 教材投稿
           %li
             = link_to "ログアウト", destroy_user_session_path, method: :delete
       #contents
-        %section
-          %h2 レッスン一覧
-          .list
-            %img{:src => "#{asset_path 'scratch.jpg'}"}/
-            %h4 ここの見出しの色は、cssフォルダのstyle.cssの「.list h4」で設定されているcolorのコードで変更できます。
-            %p 左の画像の幅もstyle.cssの「.list img」のwidthの数字で変更できます。
+        -if current_user.student_address.present?
+          %section
+            %h2 お近くのスクール一覧
+            -@users.each do |user|
+              -if current_user.student_address==user.school_address
+                .list
+                  %img{:src => "#{asset_path 'school.jpg'}"}/
+                  %h4= user.name
+                  %p= user.body
+                  %a{:href => "#{user.url}"} スクールホームページ
+
+          %section
+            %h2 レッスン一覧
+            .list
+              %img{:src => "#{asset_path 'scratch.jpg'}"}/
+              %h4 ここの見出しの色は、cssフォルダのstyle.cssの「.list h4」で設定されているcolorのコードで変更できます。
+              %p 左の画像の幅もstyle.cssの「.list img」のwidthの数字で変更できます。
+
+        -if current_user.school_address.present?
+          %section
+            %h2 投稿したレッスン一覧
+            .list
+              %img{:src => "#{asset_path 'minecraft.jpg'}"}/
+              %h4 ここの見出しの色は、cssフォルダのstyle.cssの「.list h4」で設定されているcolorのコードで変更できます。
+              %p 左の画像の幅もstyle.cssの「.list img」のwidthの数字で変更できます。
       / /contents
       %footer
         %small
