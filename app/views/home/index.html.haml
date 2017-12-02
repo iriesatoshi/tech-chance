@@ -18,9 +18,9 @@
       %header
         %h1#logo
           %a{:href => "index.html"}
-            %img{:alt => "", :src => "logo_top.png"}/
+            %img{:alt => "", :src => "#{asset_path 'logo_top.png'}"}/
         %p
-          %img#mainimg{:alt => "", :src => "mainimg.jpg"}/
+          %img#mainimg{:alt => "", :src => "#{asset_path 'mainimg.jpg'}"}/
       %nav#menubar
         %ul
           %li.current
@@ -45,11 +45,11 @@
             %dd 家の近くのプログラミングスクールが表示されるので、いつでも授業のサポートをしてくれる教室を探せます。
         %h2 　学べるレッスン一覧
         .list
-          %img{:src => "scratch.jpg"}/
+          %img{:src => "#{asset_path 'scratch.jpg'}"}/
           %h4 スクラッチ
           %p Scratch (スクラッチ) とは初心者が、プログラミングの正しい構文の書き方を覚えること無く学習ができるプログラミング言語学習環境です。MITメディアラボが開発し、遊び心のある実験やインタラクティブアニメーション、ゲームなどの製作を通してさらなる学習のやる気を起こさせることを目的とした教材です。
         .list
-          %img{:src => "minecraft.jpg"}/
+          %img{:src => "#{asset_path 'minecraft.jpg'}"}/
           %h4 マインクラフト
           %p 今、話題のものづくりゲーム「Minecraft（マインクラフト）」を使ってプログラミングが学習できる教育プログラムです。Minecraftの世界の中でコンピュータへの命令をプログラミングすることで、洞窟を掘る、建物を建てる、等の動作を自動で行わせるような開発を学習することができます。ゲームの中で楽しくプログラミングの基本が学べるよう設計されたコースです。
       / /contents
