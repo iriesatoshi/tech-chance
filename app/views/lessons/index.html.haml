@@ -17,7 +17,7 @@
     #container
       %header
         %h1#logo
-          %a{:href => "index.html"}
+          %a{:href => "/lessons"}
             %img{:alt => "TechChance!EX", :src => "#{asset_path 'logo_top.png'}"}/
       %nav#menubar
         %ul
@@ -38,7 +38,10 @@
             -@users.each do |user|
               -if current_user.student_address==user.school_address
                 .list
-                  %img{:src => "#{asset_path 'school.jpg'}"}/
+                  -if user.image.present?
+                    %img= image_tag user.image
+                  -else
+                    %img{:src => "#{asset_path 'school.jpg'}"}/
                   %h4= user.name
                   %p= user.body
                   %a{:href => "#{user.url}"} スクールホームページ

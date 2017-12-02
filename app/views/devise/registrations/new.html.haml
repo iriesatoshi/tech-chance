@@ -54,6 +54,6 @@
           .field-label
             = f.label :スクール画像
           .field-input
-            = f.text_field :image, autofocus: true
+            = f.file_field :image, class: 'fileInput', autofocus: true
         .actions
           = f.submit "Create Account", class: 'btn'
