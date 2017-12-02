@@ -21,6 +21,7 @@
             %img{:alt => "TechChance!EX", :src => "#{asset_path 'logo_top.png'}"}/
       %nav#menubar
         %ul
+          %li= "Hello!,#{current_user.name}さん"
           -if current_user.student_address.present?
             %li
               = link_to "アカウント編集", edit_user_path(current_user)
@@ -28,7 +29,7 @@
             %li
               = link_to "アカウント編集", school_edit_user_path(current_user)
             %li
-              %a{:href => "/"} 教材投稿
+              %a{:href => "/lessons/new"} 教材投稿
           %li
             = link_to "ログアウト", destroy_user_session_path, method: :delete
       #contents
@@ -47,19 +48,31 @@
                   %a{:href => "#{user.url}"} スクールホームページ
 
           %section
-            %h2 レッスン一覧
-            .list
-              %img{:src => "#{asset_path 'scratch.jpg'}"}/
-              %h4 ここの見出しの色は、cssフォルダのstyle.cssの「.list h4」で設定されているcolorのコードで変更できます。
-              %p 左の画像の幅もstyle.cssの「.list img」のwidthの数字で変更できます。
+            %h2 学べるレッスン一覧
+            -@lessons.each do |lesson|
+              .list
+                -if lesson.image.present?
+                  %img= image_tag lesson.image
+                -else
+                  %img{:src => "#{asset_path 'scratch.jpg'}"}/
+                %h4= lesson.title
+                %p= lesson.body
+                %p ----------------------------------
+                %p= "提供スクール:#{lesson.user.name}"
 
         -if current_user.school_address.present?
           %section
             %h2 投稿したレッスン一覧
-            .list
-              %img{:src => "#{asset_path 'minecraft.jpg'}"}/
-              %h4 ここの見出しの色は、cssフォルダのstyle.cssの「.list h4」で設定されているcolorのコードで変更できます。
-              %p 左の画像の幅もstyle.cssの「.list img」のwidthの数字で変更できます。
+            -current_user.lessons.each do |lesson|
+              .list
+                -if lesson.image.present?
+                  %img= image_tag lesson.image
+                -else
+                  %img{:src => "#{asset_path 'minecraft.jpg'}"}/
+                %h4= lesson.title
+                %p= lesson.body
+                = link_to "編集", edit_lesson_path(lesson.id)
+                = link_to "削除", lesson_path(lesson.id), method: :delete
       / /contents
       %footer
         %small

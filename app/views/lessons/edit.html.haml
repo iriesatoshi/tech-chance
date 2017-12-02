@@ -1,0 +1,24 @@
+#account-page.account-page
+  .account-page__inner.clearfix
+    .account-page__inner--left.account-page__header
+      %h2 Edit Lesson
+      %h5 レッスンの編集
+    .account-page__inner--right.user-form
+      = form_for @lesson do |f|
+        .field
+          .field-label
+            = f.label :レッスン名
+          .field-input
+            = f.text_field :title, autofocus: true
+        .field
+          .field-label
+            = f.label :レッスン内容
+          .field-input
+            = f.text_field :body, autofocus: true
+        .field
+          .field-label
+            = f.label :画像
+          .field-input
+            = f.file_field :image, class: 'fileInput', autofocus: true
+        .actions
+          = f.submit "Update Lesson", class: 'btn'
