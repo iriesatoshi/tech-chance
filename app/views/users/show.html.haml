@@ -25,6 +25,8 @@
           -if current_user.student_address.present?
             %li
               = link_to "アカウント編集", edit_user_path(current_user)
+            %li
+              = link_to "マイレッスン", my_lessons_path
           -if current_user.school_address.present?
             %li
               = link_to "アカウント編集", school_edit_user_path(current_user)

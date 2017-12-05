@@ -16,6 +16,8 @@ class LessonsController < ApplicationController
   def create
     @lesson = Lesson.new(lesson_params)
       if @lesson.save
+        @my_lesson = MyLesson.new(user_id: current_user.id, lesson_id: @lesson.id)
+        @my_lesson.save
         redirect_to lessons_path
       end
   end

@@ -4,6 +4,11 @@ Rails.application.routes.draw do
   resources :lessons do
     resources :products
   end
+  resources :my_lessons, only: [:index, :destroy] do
+    member do
+      post "add", to: "my_lessons#create"
+    end
+  end
   resources :users, only: [:edit, :update, :show] do
     member do
       get :school_edit

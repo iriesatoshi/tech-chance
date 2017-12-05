@@ -1,0 +1,61 @@
+!!!
+%html{:lang => "ja"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "UTF-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %title 小中学生向けオンラインプログラミング学習サービスTechChance!EX
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    %meta{:content => "小学生、中学生向けのオンラインプログラミング学習サービスです", :name => "description"}/
+    %meta{:content => "小学生,中学生,オンライン,プログラミング,スクール", :name => "keywords"}/
+    %link{:href => "stylesheets/home.scss", :rel => "stylesheets"}/
+    %script{:src => "javascripts/home.js", :type => "text/javascript"}
+    /[if lt IE 9]
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  %body
+    #container
+      %header
+        %h1#logo
+          %a{:href => "/lessons"}
+            %img{:alt => "TechChance!EX", :src => "#{asset_path 'logo_top.png'}"}/
+      %nav#menubar
+        %ul
+          %li= "Hello!,#{current_user.name}さん"
+          -if current_user.student_address.present?
+            %li
+              = link_to "アカウント編集", edit_user_path(current_user)
+            %li
+              = link_to "マイレッスン", my_lessons_path
+          -if current_user.school_address.present?
+            %li
+              = link_to "アカウント編集", school_edit_user_path(current_user)
+            %li
+              %a{:href => "/lessons/new"} レッスンの投稿
+          %li
+            = link_to "ログアウト", destroy_user_session_path, method: :delete
+      #contents
+        %section
+          %h2 マイレッスン一覧
+          -current_user.my_lessons.each do |my_lesson|
+            .list
+              -if my_lesson.lesson.image.present?
+                %img= image_tag my_lesson.lesson.image
+              -else
+                %img{:src => "#{asset_path 'scratch.jpg'}"}/
+              %h4= my_lesson.lesson.title
+              %p= my_lesson.lesson.body
+              = link_to "レッスン詳細", lesson_path(my_lesson.lesson.id)
+              %p ----------------------------------
+              %p=link_to "提供スクール:#{my_lesson.lesson.user.name}", user_path(my_lesson.lesson.user.id)
+      / /contents
+      %footer
+        %small
+          Copyright©
+          %a{:href => "/lessons"} TechChance!EX
+          All Rights Reserved.
+        %span.pr
+          《
+          %a{:href => "https://template-party.com/", :target => "_blank"}> Web Design:Template-Party
+          》
+    / /container
