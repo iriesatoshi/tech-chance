@@ -28,33 +28,18 @@
           -if current_user.school_address.present?
             %li
               = link_to "アカウント編集", school_edit_user_path(current_user)
-            %li
-              %a{:href => "/lessons/new"} 教材投稿
           %li
             = link_to "ログアウト", destroy_user_session_path, method: :delete
       #contents
-        -if @user.school_address.present?
-          %section
-            %h2= "スクール名:#{@user.name}"
-            .list
-              -if @user.image.present?
-                %img= image_tag @user.image
-              -else
-                %img{:src => "#{asset_path 'school.jpg'}"}/
-              %p= @user.body
-              %a{:href => "#{@user.url}"} スクールホームページ
-
-          %section
-            %h2= "#{@user.name}が投稿したレッスン一覧"
-            -@user.lessons.each do |lesson|
-              .list
-                -if lesson.image.present?
-                  %img= image_tag lesson.image
-                -else
-                  %img{:src => "#{asset_path 'minecraft.jpg'}"}/
-                %h4= lesson.title
-                %p= lesson.body
-                = link_to "レッスン詳細", lesson_path(lesson.id)
+        %section
+          %h2= @product.title
+          -if current_user.school_address.present?
+            = link_to "編集", "/lessons/#{@lesson.id}/products/#{@product.id}/edit"
+            = link_to "削除", "/lessons/#{@lesson.id}/products/#{@product.id}", method: :delete
+          .show
+            %p= @product.body
+            %a{:href => "#{@product.url}"} 教材動画
+            %object{:data => "#{@product.pdf}/", :type => "application/pdf", :width => "100%", :height => "100%"}
       / /contents
       %footer
         %small

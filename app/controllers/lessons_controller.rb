@@ -1,7 +1,12 @@
 class LessonsController < ApplicationController
+  before_action :authenticate_user!
   def index
     @users = User.all
     @lessons = Lesson.all
+  end
+
+  def show
+    @lesson = Lesson.find(params[:id])
   end
 
   def new
@@ -21,7 +26,8 @@ class LessonsController < ApplicationController
 
   def update
     @lesson = Lesson.find(params[:id])
-      if @lesson.update(lesson_params)
+      if @lesson.user_id==current_user.id
+        @lesson.update(lesson_params)
         redirect_to lessons_path
       else
         render "edit"
@@ -30,8 +36,11 @@ class LessonsController < ApplicationController
 
   def destroy
     @lesson = Lesson.find(params[:id])
-      if @lesson.destroy
+      if @lesson.user_id==current_user.id
+        @lesson.destroy
         redirect_to lessons_path
+      else
+        render "show"
       end
   end
 

@@ -1,10 +1,13 @@
 class UsersController < ApplicationController
+    before_action :authenticate_user!
     def edit
       @user = User.find(params[:id])
     end
 
     def update
-      if current_user.update(user_params)
+      @user = User.find(params[:id])
+      if @user.id==current_user.id
+        current_user.update(user_params)
         redirect_to lessons_path
       else
         render "edit"

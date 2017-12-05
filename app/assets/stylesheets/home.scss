@@ -147,6 +147,16 @@ header {
   padding: 0 !important;
 }
 
+.show {
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;  /*下線の幅、線種、色*/
+  padding: 20px;  /*ボックス内の余白*/
+  height: 1000px;
+}
+.show p {
+  padding: 0 !important;
+}
+
 /*フッター(ページ最下部のcopyrightのパーツ)設定
 ---------------------------------------------------------------------------*/
 footer {
