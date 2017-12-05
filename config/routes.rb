@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
   resources :lessons
-  resources :users, only: [:edit, :update] do
+  resources :users, only: [:edit, :update, :show] do
     member do
       get :school_edit
     end

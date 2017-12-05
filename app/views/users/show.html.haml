@@ -33,37 +33,20 @@
           %li
             = link_to "ログアウト", destroy_user_session_path, method: :delete
       #contents
-        -if current_user.student_address.present?
+        -if @user.school_address.present?
           %section
-            %h2 お近くのスクール一覧
-            -@users.each do |user|
-              -if current_user.student_address==user.school_address
-                .list
-                  -if user.image.present?
-                    %img= image_tag user.image
-                  -else
-                    %img{:src => "#{asset_path 'school.jpg'}"}/
-                  %h4= link_to "#{user.name}", user_path(user.id)
-                  %p= user.body
-                  %a{:href => "#{user.url}"} スクールホームページ
+            %h2= "スクール名:#{@user.name}"
+            .list
+              -if @user.image.present?
+                %img= image_tag @user.image
+              -else
+                %img{:src => "#{asset_path 'school.jpg'}"}/
+              %p= @user.body
+              %a{:href => "#{@user.url}"} スクールホームページ
 
           %section
-            %h2 学べるレッスン一覧
-            -@lessons.each do |lesson|
-              .list
-                -if lesson.image.present?
-                  %img= image_tag lesson.image
-                -else
-                  %img{:src => "#{asset_path 'scratch.jpg'}"}/
-                %h4= lesson.title
-                %p= lesson.body
-                %p ----------------------------------
-                %p=link_to "提供スクール:#{lesson.user.name}", user_path(lesson.user.id)
-
-        -if current_user.school_address.present?
-          %section
-            %h2 投稿したレッスン一覧
-            -current_user.lessons.each do |lesson|
+            %h2= "#{@user.name}が投稿したレッスン一覧"
+            -@user.lessons.each do |lesson|
               .list
                 -if lesson.image.present?
                   %img= image_tag lesson.image
@@ -71,14 +54,6 @@
                   %img{:src => "#{asset_path 'minecraft.jpg'}"}/
                 %h4= lesson.title
                 %p= lesson.body
-                = link_to "編集", edit_lesson_path(lesson.id)
-                = link_to "削除", lesson_path(lesson.id), method: :delete
-          // pdfの実験
-          %section
-            %h2 実験
-            -current_user.lessons.each do |lesson|
-              .list
-                %object{:data => "#{lesson.image}/", :type => "application/pdf", :width => "100%", :height => "100%"}
       / /contents
       %footer
         %small
