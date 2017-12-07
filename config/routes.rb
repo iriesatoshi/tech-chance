@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   root 'home#index'
   resources :lessons do
     resources :products
+    collection do
+      get 'index_newest'
+    end
   end
   resources :my_lessons, only: [:index, :destroy] do
     member do
