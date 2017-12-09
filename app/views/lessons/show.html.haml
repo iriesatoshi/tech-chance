@@ -1,73 +1,57 @@
-!!!
-%html{:lang => "ja"}
-  %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{:charset => "UTF-8"}/
-    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
-    %title 小中学生向けオンラインプログラミング学習サービスTechChance!EX
-    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
-    %meta{:content => "小学生、中学生向けのオンラインプログラミング学習サービスです", :name => "description"}/
-    %meta{:content => "小学生,中学生,オンライン,プログラミング,スクール", :name => "keywords"}/
-    %link{:href => "stylesheets/home.scss", :rel => "stylesheets"}/
-    %script{:src => "javascripts/home.js", :type => "text/javascript"}
-    /[if lt IE 9]
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  %body
-    #container
-      %header
-        %h1#logo
-          %a{:href => "/lessons"}
-            %img{:alt => "TechChance!EX", :src => "#{asset_path 'logo_top.png'}"}/
-      %nav#menubar
-        %ul
-          %li= "Hello!,#{current_user.name}さん"
-          -if current_user.student_address.present?
-            %li
-              = link_to "アカウント編集", edit_user_path(current_user)
-            %li
-              = link_to "マイレッスン", my_lessons_path
-          -if current_user.school_address.present?
-            %li
-              = link_to "アカウント編集", school_edit_user_path(current_user)
-            %li
-              %a{:href => "/lessons/#{@lesson.id}/products/new"} 教材の投稿
-          %li
-            = link_to "ログアウト", destroy_user_session_path, method: :delete
-      #contents
-        %section
-          %h2 レッスン詳細
-          .list
-            -if @lesson.image.present?
-              %img= image_tag @lesson.image
-            -else
-              %img{:src => "#{asset_path 'scratch.jpg'}"}/
-            %h4= @lesson.title
-            %p= @lesson.body
-            %p ----------------------------------
-            %p= link_to "提供スクール:#{@lesson.user.name}", user_path(@lesson.user.id)
-            -if current_user.student_address.present?
-              %p= "マイレッスンに追加された数:#{MyLesson.where(lesson_id: @lesson.id).count}件"
-              - if MyLesson.find_by(user_id: current_user.id, lesson_id: @lesson.id)
-                = link_to "マイレッスンから削除", my_lesson_path(@lesson.id), method: :delete
-              - else
-                = link_to "マイレッスンに追加", "/my_lessons/#{@lesson.id}/add", method: :post
-        %section
-          %h2= "#{@lesson.title}の教材一覧"
-          -@lesson.products.each do |product|
-            %table.ta1
-              %tr
-                %th
-                  %a{:href => "/lessons/#{@lesson.id}/products/#{product.id}"}= product.title
-                %td= product.body
-      / /contents
-      %footer
-        %small
-          Copyright©
-          %a{:href => "/lessons"} TechChance!EX
-          All Rights Reserved.
-        %span.pr
-          《
-          %a{:href => "https://template-party.com/", :target => "_blank"}> Web Design:Template-Party
-          》
-    / /container
+#container
+  %header
+    %h1#logo
+      %a{:href => "/lessons"}
+        %img{:alt => "TechChance!EX", :src => "#{asset_path 'logo_top.png'}"}/
+  %nav#menubar
+    %ul
+      %li= "Hello!,#{current_user.name}さん"
+      -if current_user.student_address.present?
+        %li
+          = link_to "アカウント編集", edit_user_path(current_user)
+        %li
+          = link_to "マイレッスン", my_lessons_path
+      -if current_user.school_address.present?
+        %li
+          = link_to "アカウント編集", school_edit_user_path(current_user)
+        %li
+          %a{:href => "/lessons/#{@lesson.id}/products/new"} 教材の投稿
+      %li
+        = link_to "ログアウト", destroy_user_session_path, method: :delete
+  #contents
+    %section
+      %h2 レッスン詳細
+      .list
+        -if @lesson.image.present?
+          %img= image_tag @lesson.image
+        -else
+          %img{:src => "#{asset_path 'scratch.jpg'}"}/
+        %h4= @lesson.title
+        %p= @lesson.body
+        %p ----------------------------------
+        %p= link_to "提供スクール:#{@lesson.user.name}", user_path(@lesson.user.id)
+        -if current_user.student_address.present?
+          %p= "マイレッスンに追加された数:#{MyLesson.where(lesson_id: @lesson.id).count}件"
+          - if MyLesson.find_by(user_id: current_user.id, lesson_id: @lesson.id)
+            = link_to "マイレッスンから削除", my_lesson_path(@lesson.id), method: :delete
+          - else
+            = link_to "マイレッスンに追加", "/my_lessons/#{@lesson.id}/add", method: :post
+    %section
+      %h2= "#{@lesson.title}の教材一覧"
+      -@lesson.products.each do |product|
+        %table.ta1
+          %tr
+            %th
+              %a{:href => "/lessons/#{@lesson.id}/products/#{product.id}"}= product.title
+            %td= product.body
+  / /contents
+  %footer
+    %small
+      Copyright©
+      %a{:href => "/lessons"} TechChance!EX
+      All Rights Reserved.
+    %span.pr
+      《
+      %a{:href => "https://template-party.com/", :target => "_blank"}> Web Design:Template-Party
+      》
+/ /container
