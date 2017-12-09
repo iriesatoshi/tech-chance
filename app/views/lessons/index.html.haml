@@ -33,7 +33,46 @@
               %p= user.body
               %a{:href => "#{user.url}"} スクールホームページ
         = paginate @users
+    -if @lessons.present?
+      %section
+        %h2 学べるレッスン一覧
+        = link_to "新着順", index_newest_lessons_path
+        = link_to "人気順", lessons_path
+        -@lessons.each do |lesson|
+          .list
+            -if lesson.image.present?
+              %img= image_tag lesson.image
+            -else
+              %img{:src => "#{asset_path 'scratch.jpg'}"}/
+            %h4= lesson.title
+            %p= lesson.body
+            = link_to "レッスン詳細", lesson_path(lesson.id)
+            %p ----------------------------------
+            %p=link_to "提供スクール:#{lesson.user.name}", user_path(lesson.user.id)
+        = paginate @lessons
+
+    -if current_user.school_address.present?
+      %section
+        %h2 投稿したレッスン一覧
+        -current_user.lessons.each do |lesson|
+          .list
+            -if lesson.image.present?
+              %img= image_tag lesson.image
+            -else
+              %img{:src => "#{asset_path 'minecraft.jpg'}"}/
+            %h4= lesson.title
+            %p= lesson.body
+            = link_to "レッスン詳細", lesson_path(lesson.id)
+            = link_to "編集", edit_lesson_path(lesson.id)
+            = link_to "削除", lesson_path(lesson.id), method: :delete
   / /contents
   %footer
-
+    %small
+      Copyright©
+      %a{:href => "/lessons"} TechChance!EX
+      All Rights Reserved.
+    %span.pr
+      《
+      %a{:href => "https://template-party.com/", :target => "_blank"}> Web Design:Template-Party
+      》
 / /container
