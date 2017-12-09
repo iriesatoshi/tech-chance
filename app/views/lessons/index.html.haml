@@ -54,17 +54,18 @@
     -if current_user.school_address.present?
       %section
         %h2 投稿したレッスン一覧
-        -current_user.lessons.each do |lesson|
-          .list
-            -if lesson.image.present?
-              %img= image_tag lesson.image
-            -else
-              %img{:src => "#{asset_path 'minecraft.jpg'}"}/
-            %h4= lesson.title
-            %p= lesson.body
-            = link_to "レッスン詳細", lesson_path(lesson.id)
-            = link_to "編集", edit_lesson_path(lesson.id)
-            = link_to "削除", lesson_path(lesson.id), method: :delete
+        -if current_user.lessons.present?
+          -current_user.lessons.each do |lesson|
+            .list
+              -if lesson.image.present?
+                %img= image_tag lesson.image
+              -else
+                %img{:src => "#{asset_path 'minecraft.jpg'}"}/
+              %h4= lesson.title
+              %p= lesson.body
+              = link_to "レッスン詳細", lesson_path(lesson.id)
+              = link_to "編集", edit_lesson_path(lesson.id)
+              = link_to "削除", lesson_path(lesson.id), method: :delete
   / /contents
   %footer
     %small
