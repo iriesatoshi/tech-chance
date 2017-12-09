@@ -38,13 +38,12 @@
             = link_to "マイレッスンに追加", "/my_lessons/#{@lesson.id}/add", method: :post
     %section
       %h2= "#{@lesson.title}の教材一覧"
-      -if @lesson.products.present?
-        -@lesson.products.each do |product|
-          %table.ta1
-            %tr
-              %th
-                %a{:href => "/lessons/#{@lesson.id}/products/#{product.id}"}= product.title
-              %td= product.body
+      -@lesson.products.each do |product|
+        %table.ta1
+          %tr
+            %th
+              %a{:href => "/lessons/#{@lesson.id}/products/#{product.id}"}= product.title
+            %td= product.body
   / /contents
   %footer
     %small
