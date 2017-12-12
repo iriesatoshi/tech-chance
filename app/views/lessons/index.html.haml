@@ -17,7 +17,7 @@
         %li
           %a{:href => "/lessons/new"} レッスンの投稿
       %li
-        = link_to "サインアウト", destroy_user_session_path, method: :delete
+        = link_to "ログアウト", destroy_user_session_path, method: :delete
   #contents
     -if current_user.student_address.present?
       %section
