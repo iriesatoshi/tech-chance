@@ -64,7 +64,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'pry-rails'
 gem 'kaminari'
-gem 'fog'
+gem 'fog', '~> 1.28.0'
 
 group :production do
   gem 'unicorn'
