@@ -15,6 +15,8 @@ class ProductsController < ApplicationController
     @lesson = Lesson.find(params[:lesson_id])
       if @product.save
         redirect_to lesson_path(@lesson.id)
+      else
+        redirect_to root_path
       end
   end
 

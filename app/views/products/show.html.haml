@@ -25,7 +25,7 @@
       .show
         %p= @product.body
         %a{:href => "#{@product.url}"} 教材動画
-        %object{:data => "#{@product.pdf}/", :type => "application/pdf", :width => "100%", :height => "100%"}
+        %object{:data => "#{@product.pdf}", :type => "application/pdf", :width => "100%", :height => "100%"}
   / /contents
   %footer
     %small
