@@ -1,6 +1,7 @@
 # config valid for current version and patch releases of Capistrano
 lock '~> 3.10.1'
 
+set :linked_files, %w{ config/secrets.yml }
 set :application, 'tech-chance'
 set :repo_url,  'git@github.com:iriesatoshi/tech-chance.git'
 
