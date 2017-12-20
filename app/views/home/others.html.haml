@@ -1,0 +1,43 @@
+#container
+  %header
+    %h1#logo
+      %a{:href => "/"}
+        %img{:alt => "TechChance!EX", :src => "#{asset_path 'logo_top.png'}"}/
+    %nav#menubar
+      %ul
+        %li.current
+          %a{:href => "/"} TechChance!EX
+        %li
+          %a{:href => "/users/sign_in"} ログイン
+        %li
+          %a{:href => "/users/sign_up"} 無料会員登録
+        %li
+          %a{:href => "/users/sign_up"} スクール登録
+    #contents
+      %h2 利用規約
+      .show
+        %object{:data => "#{asset_path 'rule.pdf'}", :type => "application/pdf", :width => "100%", :height => "100%"}
+      %h2 特定商取引法に基づく表示
+      .show
+        %object{:data => "#{asset_path 'legal.pdf'}", :type => "application/pdf", :width => "100%", :height => "100%"}
+      %h2 プライバシーポリシー
+      .show
+        %object{:data => "#{asset_path 'privacy_policy.pdf'}", :type => "application/pdf", :width => "100%", :height => "100%"}
+    / /contents
+    %footer
+      %small
+        Copyright©
+        %a{:href => "/"} TechChance!EX
+        All Rights Reserved.
+        %a{:href => "https://techchance.jp/company/"} 運営会社
+        %a{:href => "/home/others"} 利用規約/特定商取引法に基づく表示/プライバシーポリシー
+      %span.pr
+        《
+        %a{:href => "https://template-party.com/", :target => "_blank"}> Web Design:Template-Party
+        》
+  / /container
+  / スマホ用更新情報　480px以下
+  :javascript
+    if (OCwindowWidth() <= 480) {
+      open_close("newinfo_hdr", "newinfo");
+    }

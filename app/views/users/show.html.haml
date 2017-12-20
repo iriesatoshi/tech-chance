@@ -37,7 +37,7 @@
             -if lesson.image.present?
               %img= image_tag lesson.image
             -else
-              %img{:src => "#{asset_path 'minecraft.jpg'}"}/
+              %img{:src => "#{asset_path 'scratch.jpg'}"}/
             %h4= lesson.title
             %p= lesson.body
             = link_to "レッスン詳細", lesson_path(lesson.id)

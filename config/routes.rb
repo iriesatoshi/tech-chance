@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
+  resources :home, only: [:index] do
+    collection do
+      get :others
+    end
+  end
   resources :lessons do
     resources :products
     collection do
