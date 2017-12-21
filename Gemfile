@@ -65,6 +65,7 @@ gem 'mini_magick'
 gem 'pry-rails'
 gem 'kaminari'
 gem 'fog', '1.36.0'
+gem 'payjp'
 
 group :production do
   gem 'unicorn'

@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     resources :products
     collection do
       get 'index_newest'
+      get 'purchase_view'
+      post 'purchase'
+      delete 'free'
     end
   end
   resources :my_lessons, only: [:index, :destroy] do

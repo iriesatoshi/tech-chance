@@ -55,6 +55,30 @@ class LessonsController < ApplicationController
       end
   end
 
+  def purchase_view
+
+  end
+  def purchase
+   Payjp.api_key = Rails.application.secrets.payjp_secret_key
+     if @customer = Payjp::Customer.create(card: params['payjp-token'],email: current_user.email, description: current_user.name)
+       @subscription = Payjp::Subscription.create(plan: 'techchance555',customer: @customer.id, prorate: true)
+       @user = User.find(current_user)
+       @user.update(customer_id: @customer.id,subscription_id: @subscription.id)
+       redirect_to lessons_path, notice: "有料会員になりました"
+     else
+       redirect_to lessons_path
+     end
+  end
+
+  def free
+    Payjp.api_key = Rails.application.secrets.payjp_secret_key
+    subscription = Payjp::Subscription.retrieve(current_user.subscription_id)
+    subscription.delete
+    @user = User.find(current_user)
+    @user.update(subscription_id: nil)
+    redirect_to lessons_path, alert: "有料会員を辞めました"
+  end
+
   private
 
    def lesson_params

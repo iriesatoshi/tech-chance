@@ -8,6 +8,22 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @lesson = Lesson.find(params[:lesson_id])
+    if @product.lesson.user_id==current_user.id || @product.free != 'limited'
+    elsif current_user.subscription_id.present?
+      begin
+      Payjp.api_key = Rails.application.secrets.payjp_secret_key
+      subscription = Payjp::Subscription.retrieve(current_user.subscription_id)
+      if subscription.status == 'active'
+      else
+        subscription.delete
+        @user = User.find(current_user)
+        @user.update(subscription_id: nil)
+        redirect_to purchase_view_lessons_path, alert: "カード情報の更新が正常に行われていません"
+      end
+      end
+    else
+      redirect_to purchase_view_lessons_path, alert: "有料会員登録を行ってください"
+    end
   end
 
   def create
@@ -50,6 +66,6 @@ class ProductsController < ApplicationController
   private
 
    def product_params
-     params.require(:product).permit(:title,:body,:url,:pdf).merge(lesson_id: params[:lesson_id])
+     params.require(:product).permit(:title,:body,:url,:pdf,:free).merge(lesson_id: params[:lesson_id])
    end
 end

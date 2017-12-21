@@ -1,0 +1,61 @@
+#container
+  %header
+    %h1#logo
+      %a{:href => "/lessons"}
+        %img{:alt => "TechChance!EX", :src => "#{asset_path 'logo_top.png'}"}/
+  %nav#menubar
+    %ul
+      %li= "Hello!,#{current_user.name}さん"
+      -if current_user.student_address.present?
+        %li
+          = link_to "アカウント編集", edit_user_path(current_user)
+        %li
+          = link_to "マイレッスン", my_lessons_path
+        %li
+          = link_to "有料会員登録/解除", purchase_view_lessons_path
+      -if current_user.school_address.present?
+        %li
+          = link_to "アカウント編集", school_edit_user_path(current_user)
+        %li
+          %a{:href => "/lessons/new"} レッスンの投稿
+      %li
+        = link_to "ログアウト", destroy_user_session_path, method: :delete
+  #contents
+    %section
+      %h2 有料会員登録
+      -if current_user.subscription_id.present?
+        .list
+          %p 下記のリンクをクリックすると、有料プランの自動更新が停止されます。
+          %p 有料プランを停止される方は、以下のリンクをクリックしてください。
+          %p ------------------------------------------------
+          =link_to "有料会員を辞める", free_lessons_path, method: :delete
+      -else
+        .list
+          %h4 月額料金 (税込) ¥980で有料会員限定の教材が閲覧可能です。
+          %a{:href => "/home/others"} 利用規約/特定商取引法に基づく表示/プライバシーポリシーに同意の上ご登録ください
+          %p 下記の”カードで支払う”のボタンから有料会員登録を行えます。
+          %p ------------------------------------------------
+          = form_tag(action: :purchase, method: :post) do
+            %script.payjp-button{"data-key" => "#{Rails.application.secrets.payjp_public_key}", :src => "https://checkout.pay.jp", :type => "text/javascript"}
+        %section
+          %h2 よくある質問
+          .list
+            %p Q.月の途中で有料プランに登録した場合、料金はどのようになりますか？
+            %h4 A.初月は月末までの料金が日割りで引き落とされます。翌月から毎月1日にその月の月額料金が引き落とされます。
+            %p ------------------------------------------------
+            %p Q.クレジットカード以外の支払い方法には対応していますか？
+            %h4 A.大変申し訳ございませんが、クレジットカード以外のお支払いには基本的に対応しておりません。
+            %p ------------------------------------------------
+            %p Q.有料プランは自動的に更新されますか？
+            %h4 A.はい。1ヶ月が経ちますと、自動的に更新される形となっております。
+  / /contents
+  %footer
+    %small
+      Copyright©
+      %a{:href => "/lessons"} TechChance!EX
+      All Rights Reserved.
+    %span.pr
+      《
+      %a{:href => "https://template-party.com/", :target => "_blank"}> Web Design:Template-Party
+      》
+/ /container
