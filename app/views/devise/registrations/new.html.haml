@@ -43,16 +43,19 @@
         .field
           .field-label
             = f.label :スクール説明
+            %i (スクール登録以外の方は記入しないで下さい)
           .field-input
             = f.text_field :body, autofocus: true
         .field
           .field-label
             = f.label :スクールホームページ
+            %i (スクール登録以外の方は記入しないで下さい)
           .field-input
             = f.text_field :url, autofocus: true
         .field
           .field-label
             = f.label :スクール画像
+            %i (スクール登録以外の方は記入しないで下さい)
           .field-input
             = f.file_field :image, class: 'fileInput', autofocus: true
         .actions
