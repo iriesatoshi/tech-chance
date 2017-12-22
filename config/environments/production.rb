@@ -1,4 +1,14 @@
 Rails.application.configure do
+  config.action_mailer.default_url_options = { host: 'http://www.techchance.net/' }
+  config.action_mailer.smtp_settings = {
+  :enable_starttls_auto => true,
+  :address => "smtp.gmail.com",
+  :port => 587,
+  :domain => 'smtp.gmail.com',
+  :user_name => "techchance555.ex@gmail.com", #gmailアドレス
+  :password => Rails.application.secrets.gmail_key, #gmailパスワード
+  :authentication => 'login',
+  }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

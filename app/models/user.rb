@@ -5,7 +5,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, uniqueness: true
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
   has_many :lessons, through: :my_lessons, dependent: :destroy
   has_many :my_lessons, dependent: :destroy
   validates :student_address_or_school_address, absence: true

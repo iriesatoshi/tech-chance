@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171221003423) do
+ActiveRecord::Schema.define(version: 20171222075723) do
 
   create_table "lessons", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "body",       limit: 65535, null: false
@@ -65,6 +65,10 @@ ActiveRecord::Schema.define(version: 20171221003423) do
     t.integer  "my_lesson_sum",                        default: 0
     t.string   "customer_id"
     t.string   "subscription_id"
+    t.string   "confirmation_token"
+    t.string   "unconfirmed_email"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
