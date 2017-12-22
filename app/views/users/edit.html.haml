@@ -21,6 +21,7 @@
         .field
           .field-label
             = f.label :email
+            %i (Emailを変更された場合、変更先メールアドレスへアカウント認証のメールが送られます。認証確認後、Emailが変更となります。)
           .field-input
             = f.email_field :email
         .actions
